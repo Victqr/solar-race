@@ -58,4 +58,3 @@ def get_temperature():
 
 if __name__ == '__main__':
     client.run('-----') # start de Discord bot
-    app.run() # start de Flask app
