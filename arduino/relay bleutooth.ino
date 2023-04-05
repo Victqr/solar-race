@@ -1,32 +1,35 @@
-char Incoming_value = 0;
+#include <SoftwareSerial.h>
 
-const int relay1_pin = 1;
-const int relay2_pin = 2;
-const int relay3_pin = 3;
+SoftwareSerial bluetoothSerial(0, 1); // RX, TX pinnen voor de Bluetooth-module
 
-void setup() 
-{
-  Serial.begin(9600);         
-  pinMode(relay1_pin, OUTPUT);
-  pinMode(relay2_pin, OUTPUT);
-  pinMode(relay3_pin, OUTPUT);
+int relayPin1 = 1;
+int relayPin2 = 2;
+int relayPin3 = 3;
+
+
+void setup() {
+  Serial.begin(9600);
+  bluetoothSerial.begin(9600); // Start de Bluetooth-verbinding
+  pinMode(relayPin1, OUTPUT);
+  pinMode(relayPin2, OUTPUT);
+  pinMode(relayPin3, OUTPUT);
+
 }
 
-void loop()
-{
-  if(Serial.available() > 0)  
-  {
-    Incoming_value = Serial.read();      
-    Serial.print(Incoming_value);        
-    Serial.print("\n");        
-    if(Incoming_value == '1')             
-      digitalWrite(relay1_pin, HIGH);  
-      digitalWrite(relay2_pin, HIGH);  
-      digitalWrite(relay3_pin, HIGH);  
+void loop() {
+  if (bluetoothSerial.available()) {
+    char bluetooth_send = bluetoothSerial.read(); // Lees het ontvangen commando
+        Serial.println(bluetooth_send);
 
-    if(Incoming_value == '0')       
-      digitalWrite(relay1_pin, LOW);  
-      digitalWrite(relay2_pin, LOW);  
-      digitalWrite(relay3_pin, LOW);  
-  }                            
-} 
+    if (bluetooth_send == '1') {
+      digitalWrite(relayPin1, HIGH);
+      digitalWrite(relayPin2, HIGH);
+      digitalWrite(relayPin3, HIGH);
+    }
+    if (bluetooth_send == '0') {
+      digitalWrite(relayPin1, LOW);
+      digitalWrite(relayPin2, LOW);
+      digitalWrite(relayPin3, LOW);
+    }
+  }
+}
