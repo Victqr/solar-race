@@ -2,11 +2,11 @@
 
 SoftwareSerial bluetoothSerial(0, 1); // RX, TX pinnen voor de Bluetooth-module
 
-int relayPin1 = 1;
-int relayPin2 = 2;
-int relayPin3 = 3;
+int relayPin1 = 2;
+int relayPin2 = 3;
+int relayPin3 = 4;
 
-int escpin = 4;
+int escpin = 5;
 
 float temperatuurmotor, temperatuurbaterij, temperatuursensor3, temperatuursensor4  ; 
 float UTempmotor, UTempbatterij, UTempsensor3, UTempsensor4; 
