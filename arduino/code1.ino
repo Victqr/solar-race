@@ -6,8 +6,7 @@ int relayPin1 = 1;
 int relayPin2 = 2;
 int relayPin3 = 3;
 
-#include <SoftwareSerial.h>
-
+int escpin = 4;
 
 float temperatuurmotor, temperatuurbaterij, temperatuursensor3, temperatuursensor4  ; 
 float UTempmotor, UTempbatterij, UTempsensor3, UTempsensor4; 
@@ -28,6 +27,8 @@ void setup() {
   pinMode(relayPin1, OUTPUT);
   pinMode(relayPin2, OUTPUT);
   pinMode(relayPin3, OUTPUT);
+
+  pinMode(escpin, OUTPUT);
 }
 
 void loop() {
@@ -41,11 +42,16 @@ void loop() {
       digitalWrite(relayPin1, HIGH);
       digitalWrite(relayPin2, HIGH);
       digitalWrite(relayPin3, HIGH);
+
+      digitalWrite(escpin, HIGH);
     }
     if (bluetooth_send == '0') {
       digitalWrite(relayPin1, LOW);
       digitalWrite(relayPin2, LOW);
       digitalWrite(relayPin3, LOW);
+
+      digitalWrite(escpin, LOW);
+
     }
   }
 }
