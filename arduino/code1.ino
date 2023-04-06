@@ -22,7 +22,7 @@ int sensor4temper = 0;
 
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(19200);
   bluetoothSerial.begin(9600); // Start de Bluetooth-verbinding
   pinMode(relayPin1, OUTPUT);
   pinMode(relayPin2, OUTPUT);
