@@ -1,13 +1,12 @@
 #include <SoftwareSerial.h>
-
+#include <Servo.h>
 
 SoftwareSerial bluetoothSerial(0, 1); // RX, TX pinnen voor de Bluetooth-module
 
 int relayPin1 = 2;
 int relayPin2 = 3;
 int relayPin3 = 4;
-
-int escpin = 5;
+Servo esc;
 
 float temperatuurmotor, temperatuurbaterij, temperatuursensor3, temperatuursensor4  ; 
 float UTempmotor, UTempbatterij, UTempsensor3, UTempsensor4; 
@@ -29,7 +28,9 @@ void setup() {
   pinMode(relayPin2, OUTPUT);
   pinMode(relayPin3, OUTPUT);
 
-  pinMode(escpin, OUTPUT);
+  esc.attach(5);
+  
+  
 }
 
 void loop() {
@@ -38,20 +39,22 @@ void loop() {
   if (bluetoothSerial.available()) {
     char bluetooth_send = bluetoothSerial.read(); // Lees het ontvangen commando
         Serial.println(bluetooth_send);
+        int test = Serial.read();
+        esc.writeMicroseconds(test);
 
     if (bluetooth_send == '1') {
       digitalWrite(relayPin1, HIGH);
       digitalWrite(relayPin2, HIGH);
       digitalWrite(relayPin3, HIGH);
 
-      digitalWrite(escpin, HIGH);
+      esc.writeMicroseconds(1800);
     }
     if (bluetooth_send == '0') {
       digitalWrite(relayPin1, LOW);
       digitalWrite(relayPin2, LOW);
       digitalWrite(relayPin3, LOW);
 
-      digitalWrite(escpin, LOW);
+      esc.writeMicroseconds(1500);
 
     }
   }
@@ -80,4 +83,3 @@ void sensoren()
       Serial.println("temperatuursensor4 [C]: "); 
       Serial.println(temperatuursensor4);   
 }
-
