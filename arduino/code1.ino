@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 
-//hallo
+
 SoftwareSerial bluetoothSerial(0, 1); // RX, TX pinnen voor de Bluetooth-module
 
 int relayPin1 = 2;
