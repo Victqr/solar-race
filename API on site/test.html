@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="myDiv"></div>
+    <script>
+      function updatePlot() {
+        Plotly.d3.json("http://78.21.92.109:5000/", function(data) {
+          var battery_temp = [];
+          var motor_temp = [];
+          var sensor_3_temp = [];
+          var sensor_4_temp = [];
+          var times = [];
+          var n = Object.keys(data).length;
+          for (var i = 0; i < n; i++) {
+            var time = new Date().getTime();
+            times.push(time);
+            battery_temp.push(parseFloat(data['battery TEMP']));
+            motor_temp.push(parseFloat(data['motor TEMP']));
+            sensor_3_temp.push(parseFloat(data['sensor_3 TEMP']));
+            sensor_4_temp.push(parseFloat(data['sensor_4 TEMP']));
+          }
+          var trace1 = {
+            x: times,
+            y: battery_temp,
+            mode: 'lines+markers',
+            name: 'Battery Temperature'
+          };
+          var trace2 = {
+            x: times,
+            y: motor_temp,
+            mode: 'lines+markers',
+            name: 'Motor Temperature'
+          };
+          var trace3 = {
+            x: times,
+            y: sensor_3_temp,
+            mode: 'lines+markers',
+            name: 'Sensor 3 Temperature'
+          };
+          var trace4 = {
+            x: times,
+            y: sensor_4_temp,
+            mode: 'lines+markers',
+            name: 'Sensor 4 Temperature'
+          };
+          var layout = {
+            title: 'Temperature',
+            xaxis: {
+              title: 'Time'
+            },
+            yaxis: {
+              title: 'Temperature (°C)'
+            }
+          };
+          Plotly.newPlot('myDiv', [trace1, trace2, trace3, trace4], layout);
+        });
+      }
+      setInterval(updatePlot, 10000);
+    </script>
+  </body>
+</html>
