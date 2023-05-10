@@ -10,8 +10,10 @@ int escpin = 5;
 int motor = 1;
 int batterij = 2;
 int sensor3 = 3;
-int sensor4 = 4;
+int ldr = 4;
 
+
+int lichtwaarde = 0;
 
 void setup() {
   Serial.begin(19200);
@@ -91,11 +93,10 @@ void sensoren()
   float sensor3temperature = (sensor3voltage - 500) / 10;
     Serial.println("temperatuursensor3 [C]: "); 
       Serial.println(sensor3temperature); 
-
-  int sensor4reading = analogRead(sensor4);
-  float sensor4voltage = sensor4reading * (5000 / 1024.0);
-  float sensor4temperature = (sensor4voltage - 500) / 10;
-    Serial.println("temperatuursensor3 [C]: "); 
-      Serial.println(sensor4temperature); 
+  
+  lichtwaarde = analogRead(ldr); 
+  Serial.println(lichtwaarde);
+  Serial.println("lichtwaarde [lux]: "); 
+      Serial.println(lichtwaarde); 
 
 }

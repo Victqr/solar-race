@@ -26,7 +26,7 @@ async def on_message(message):
     elif message.channel.id == CHANNEL_SENSOR_3_TEMP:
         data['sensor_3 TEMP'] = message.content.split(': ')[1]
     elif message.channel.id == CHANNEL_SENSOR_4_TEMP:
-        data['sensor_4 TEMP'] = message.content.split(': ')[1]
+        data['lichtwaarde LUX'] = message.content.split(': ')[1]
     with open('data.json', 'w') as f:
         json.dump(data, f)
 

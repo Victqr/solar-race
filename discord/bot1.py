@@ -26,13 +26,13 @@ async def send_temperatures():
         ser_temp.write(b'3')
         temperatuursensor3 = ser_temp.readline().decode().strip()
         ser_temp.write(b'4')
-        temperatuursensor4 = ser_temp.readline().decode().strip()
+        lichtwaarde = ser_temp.readline().decode().strip()
 
         # Verstuur temperatuurwaarden naar Discord
         await client.get_channel(CHANNEL_BATTERY_TEMP).send(f"Temperatuur batterij: {temperatuurbatterij}")
         await client.get_channel(CHANNEL_MOTOR_TEMP).send(f"Temperatuur motor: {temperatuurmotor}")
         await client.get_channel(CHANNEL_SENSOR_3_TEMP).send(f"Temperatuur sensor 3: {temperatuursensor3}")
-        await client.get_channel(CHANNEL_SENSOR_4_TEMP).send(f"Temperatuur sensor 4: {temperatuursensor4}")
+        await client.get_channel(CHANNEL_SENSOR_4_TEMP).send(f"Lichtwaarde: {lichtwaarde}")
 
         # Wacht 40 seconden voordat de volgende lees- en verzendcyclus begint
         await asyncio.sleep(40)
