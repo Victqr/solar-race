@@ -43,4 +43,3 @@ async def on_ready():
     await send_temperatures()
 
 client.run('-----')
-
