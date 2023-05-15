@@ -84,6 +84,4 @@ void sensoren()
   
   lichtwaarde = analogRead(ldr); 
   Serial.println(lichtwaarde);
-      Serial.println(lichtwaarde); 
-
 }
