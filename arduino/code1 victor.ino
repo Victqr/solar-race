@@ -4,7 +4,6 @@ SoftwareSerial bluetoothSerial(0, 1); // RX, TX pinnen voor de Bluetooth-module
 int relayPin1 = 2;
 int relayPin2 = 3;
 int relayPin3 = 4;
-int relayPin4 = 5;
  
 int motor = 1;
 int batterij = 2;
@@ -19,7 +18,6 @@ void setup() {
   pinMode(relayPin1, OUTPUT);
   pinMode(relayPin2, OUTPUT);
   pinMode(relayPin3, OUTPUT);
-  pinMode(relayPin4, OUTPUT);
 }
 
 void loop() {
@@ -33,13 +31,11 @@ void loop() {
       digitalWrite(relayPin1, HIGH);
       digitalWrite(relayPin2, HIGH);
       digitalWrite(relayPin3, HIGH);
-      digitalWrite(relayPin4, HIGH);
     }
     if (bluetooth_send == '0') {
       digitalWrite(relayPin1, LOW);
       digitalWrite(relayPin2, LOW);
       digitalWrite(relayPin3, LOW);
-      digitalWrite(relayPin4, LOW);
 
     }
   }
@@ -74,24 +70,20 @@ void sensoren()
   int motorreading = analogRead(motor);
   float motorvoltage = motorreading * (5000 / 1024.0);
   float motortemperature = (motorvoltage - 500) / 10;
-    Serial.println("temperatuurmotor [C]: "); 
       Serial.println(motortemperature); 
   
   int batterijreading = analogRead(batterij);
   float batterijvoltage = batterijreading * (5000 / 1024.0);
   float batterijtemperature = (batterijvoltage - 500) / 10;
-    Serial.println("temperatuurmotor [C]: "); 
       Serial.println(batterijtemperature);
 
   int sensor3reading = analogRead(sensor3);
   float sensor3voltage = sensor3reading * (5000 / 1024.0);
   float sensor3temperature = (sensor3voltage - 500) / 10;
-    Serial.println("temperatuursensor3 [C]: "); 
       Serial.println(sensor3temperature); 
   
   lichtwaarde = analogRead(ldr); 
   Serial.println(lichtwaarde);
-  Serial.println("lichtwaarde [lux]: "); 
       Serial.println(lichtwaarde); 
 
 }
